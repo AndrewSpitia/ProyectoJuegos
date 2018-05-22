@@ -5,6 +5,7 @@
  */
 package DB;
 
+import DB.Tx;
 import Modelo.JuegoFav;
 import java.util.ArrayList;
 import java.util.List;
