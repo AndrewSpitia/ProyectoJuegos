@@ -1,0 +1,144 @@
+drop database if exists db;
+drop database if exists db;
+create database db;
+use db;
+create table Usuario(
+Nickname varchar(40) not null primary key,
+Nombre varchar(40) not null,
+Pais varchar(40) ,
+Email varchar(40) not null,
+Password varchar(40) not null,
+FechaNacimiento date ,
+ExperienciaVideojuegos varchar(40) ,
+HorasPromedioJuego varchar(40) ,
+PlataformasVideojuegos varchar(40) ,
+Idiomas varchar(40) ,
+DiasJuego varchar(40) ,
+HorarioJuego varchar(40) ,
+GenerosJuego varchar(40)
+);
+
+create table Juego(
+Id varchar(40) not null primary key,
+Nombre varchar(40) not null,
+Desarrollador varchar(40) not null,
+Calificacion varchar(40) not null,
+FechaLanzamiento varchar(40) not null,
+Descripcion varchar(1000) not null,
+Plataforma varchar(40) not null,
+Idiomas varchar(40) not null,
+Genero varchar(40) not null,
+Imagen varchar(600) not null
+);
+
+create table Amigo(
+Id varchar(40) not null primary key,
+IdUser1 varchar(40) not null,
+IdUser2 varchar(40) not null
+);
+
+create table JuegoFav(
+Id varchar(40) not null primary key,
+IdUsuario varchar(40) not null,
+IdJuego varchar(40) not null,
+HorasJugadas Integer not null
+);
+
+create table Notificacion(
+Id varchar(40) not null primary key,
+IdUsurario varchar(40) not null,
+RecomendacionJuego varchar(40),
+RecomendacionAmigo varchar(40),
+Noticia varchar(40),
+Solicitud varchar(40) 
+);
+
+create table Comentario(
+Id varchar(40) not null primary key,
+IdUsuario varchar(40) not null,
+IdJuego varchar(40) not null,
+Coment varchar(200) not null,
+Calificacion Integer not null,
+Fecha date not null
+);
+
+create table Noticia(
+Id varchar(40) not null primary key,
+Titulo varchar(100) not null,
+texto varchar(1000) not null,
+imagen varchar(300) not null
+);
+
+create table CalificacionJuego(
+Nickname varchar(40) not null primary key,
+IdJuego varchar(40) not null ,
+Calificacion integer not null
+);
+create table CalificacionComentario(
+Nickname varchar(40) not null primary key,
+IdComentario varchar(40) not null ,
+Calificacion integer
+);
+
+create table Recomendacion(
+Id varchar (40) not null primary key,
+Nickname varchar (40) not null,
+NombreJuego varchar (40) not null
+);
+
+insert into Usuario (Nickname,Nombre,Pais,Email,Password) values 
+('willy','william','Colombia','william@gmail.com','william1234'),
+('OscarR','Oscar','Colombia','oscar@gmail.com','oscar1234'),
+('rekojmon','Alejandro','Colombia','alejandro@gmail.com','alejandro1234'),
+('germann','German','Colombia','german@gmail.com','german1234'),
+('edro','Pedro','Colombia','pedro@gmail.com','pedro1234');
+
+insert into Juego (Id,Nombre,Desarrollador,Calificacion,FechaLanzamiento,Descripcion,Plataforma,Idiomas,Genero,Imagen) values
+('1','PUBG','Bluehole Studio','8.2','2017','Si te copia todo el mundo, no importa que pierdas los premios a juego del año: PlayerUnknowns Battlegrounds es el videojuego del momento, el espejo en el que todos se quieren mirar. Al título de Brendan Greene le han sentado los ocho meses en el Early Access de maravilla: buen rendimiento y pura jugabilidad multijugador. En nuestro análisis de PUBG hablamos de su compromiso con una simple norma: uno gana y 99 pierden. ¿Pollo para todos? Ni en broma. Bienvenidos a la más grande Battle Royale.','PC,PS4,XBOX','Ingles,Espanol','Battle Royale','https://www.google.com.co/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwibzJDstsDaAhUIq1kKHWrLD7sQjRx6BAgAEAU&url=https%3A%2F%2Fandro4all.com%2F2018%2F03%2Fpubg-mobile-android-descargar-espana&psig=AOvVaw1zmIYgpohKMm37EsMVjJ_n&ust=1524024231457391'),
+('2','CS:GO','Valve Corporation','9.3','2012','Un auténtico fenómeno en los cibercafés, un título legendario en partidas LAN y uno de los juegos de acción con mayor capacidad de gancho de todos los tiempos. Counter-Strike surgió, como todo el mundo ya sabe, como una modificación de Half-Life, y poco más tarde a partir del año 2000 se convirtió en un título independiente con todas las letras. Con casi 30 millones de unidades vendidas fue capaz de capturar la atención de infinidad de fans durante horas con una propuesta realmente sencilla: terroristas contra fuerzas de la ley.','PC','Ingles,Espanol','FPS','https://topjugando.com/wp-content/uploads/2018/01/cs-go-678x381.png'),
+('3','DOTA 2','Valve Corporation','10','2013','Pionero en su género, el clásico Defense of the Ancients recibe al fin su ansiada continuación de la mano de IceFrog y Valve, que han aunado fuerzas para dar vida al que es sin duda uno de los grandes videojuegos de 2013. Un título free-to-play impecable a todos los niveles que no solo hace justicia al legado del título original, sino que además lo hace con tanto estilo y rotundidad que resulta imposible no caer rendido a los encantos de DOTA 2.','PC','Ingles,Espanol','MOBA','https://i11a.3djuegos.com/juegos/6683/dota_2/fotos/maestras/dota_2-3816694.jpg'),
+('4','Rocket league','Psyonix','8.5','2015','Puede que fueras de los que esperaban mucho de Rocket League o puede, por el contrario, que seas de los que han quedado sorprendidos con su singular propuesta; sin embargo este título de Psyonix demuestra que este pequeño estudio tiene grandes ideas y muy originales conceptos jugables que ejecutar. Este equipo norteamericano ha firmado producciones como ARC Squadron o Supersonic Acrobatic Rocket-Powered Battle-Cars, un trabajo con el que, de hecho, el que nos ocupa tiene muchos puntos en común. ¿Por qué? Lo que pone sobre la mesa Rocket League son equipos de coches que disputan partidos de fútbol a toda velocidad. Exacto, como lo oyes. Una estrafalaria mezcla de combustible, una gigantesca pelota y una arena futurista que tiene lo mejor de Destruction Derby y de un partido de fútbol de ciencia ficción.','PC,PS4,XBOX','Ingles,Espanol','Deporte','http://www.nintenderos.com/wp-content/uploads/2017/06/rocket.jpg'),
+('5','R6','Ubisoft Montreal','8.3','2015','Tom Clancy’s Rainbow Six: Siege es la cuarta entrega de la saga Rainbow Six desarrollada por Ubisoft Montreal. Fue anunciado durante el E3 de junio del 2014 y, desde entonces, llamó la atención de la comunidad, ya que mostraba la inclusión táctica dentro del género de los videojuegos de disparos (shoters). Podría considerarse la combinación de clásicos FPS, como el Counter Strike, y otros tácticos, tales como el Arma. 
+Nos encontramos frente a partidas compuestas por dos equipos, los atacantes y los defensores, cada uno de cinco jugadores. En el que cada integrante del equipo, llamados operadores, tiene una habilidad única que lo diferencia por completo al resto del equipo. Lo que hace pertinente utilizar o no ciertos operadores para un mapa en específico o un tipo de modo de juego en especial.','Microsoft Windows','Ingles,Espanol','FPS','http://www.gamerfocus.co/wp-content/uploads/2018/02/Rainbow-Six-Siege.jpg'),
+('6','Fortnite', 'Epic Games', '9', '2017', 'Es un free-to-play que permite la configuración entre multiplataformas, enfocado al modo Battle Royale, con diferencias en su capacidad de construcción, versatilidad armas, movimientos y jugadas. Se presenta como uno de los grandes de la actual industria, acumulando ya millones de jugadores en el mundo.','Microsoft Windows, X-box One, PS4','Inglés, Español','Battle Royale','https://media.redadn.es/imagenes/fortnite-pc-ps4-xbox-one_316217.jpg'),
+('7','H1Z1','Daybreak Game Company','7.1','2018','Un free top lay con tintes de Battle Royale, pero con el único toque de hordas zombis. Estos es lo ofrece H1Z1, luchar por la supervivencia de interminables hordas de diferentes tipos de zombis, pero sin descuidar de todos aquellos que también quieran recursos y sobrevivir. ','Microsoft Windows','Inglés, Español','Battle Royale','https://www.google.com.co/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjRm6jtvMDaAhVEpFkKHbX7DZEQjRx6BAgAEAU&url=https%3A%2F%2Fwww.h1z1.com%2F&psig=AOvVaw1F4ZTEhOfv-6k9olbUVbD9&ust=1524025850226097'),
+('8','Heores of the Storm', 'Blizzard Entertainment','7.8','2015','El intento de Blizzard por cambiar el género MOBA, pero sin dejar el lado competitivo y sin fin de este género; claro está que Blizzard lo considera algo totalmente diferente y nuevo. Esto se debe a que incluyo funcionalidades diferentes de interacción con el mapa, así como una gran variedad de ellos. ','Microsoft Windows','Inglés, Español','MOBA','https://i.ytimg.com/vi/wPk004vsjuE/maxresdefault.jpg'),
+('9','League of Legends','Riot Games','10','2009','El MOBA más jugado de todos los tiempos, con más de 70 Millones de usuarios registrados, hasta convertirse en el juego insignia de los e-sports. Cuenta con algunas modalidades únicas que lo diferencia de sus principales competidores, además de más de 130 campeones para una versatilidad perfecta. ','Microsoft Windows','Inglés, Español','MOBA','http://media.esports.eldesmarque.com/wp-content/uploads/2016/09/League-of-Legends-LoL.jpg'),
+('10','Arma 3','Bohemia Interactive','8.1','2013','El juego de simulación bélica más realista hasta ahora, su principal enfoque es el recrear los enfrentamientos lo más fiel y cercano a la realidad; lo que lo convierte en un juego con un estilo único y bastante elaborado, teniendo una de las comunidades más comprometidas del momento, ya que deberás respetar la cadena de mando.','Microsoft Windows','Inglés, Español','FPS','https://store.bistudio.com/img/products/111/thumbs/NwoYSfUA.jpg'),
+('11','FIFA 18', 'Electronic Arts','8','2017','La última entrega de la mítica saga de Fútbol, con un porcentaje de similitud en jugadas y estadísticas como nunca antes, aunque aun por mucho que entregar. Trae la segunda versión del modo historia del juego, un añadido bastante importante y necesario para algunos jugadores.','Microsoft Windows, X-box One, PS4','Inglés, Español','Deportes','https://media.contentapi.ea.com/content/dam/ea/easports/fifa/home/2017/june/5/homepage-share.jpg'),
+('12','PES 2018','Komami','7.8','2017',' La última entrega del legendario Winning Eleven, lo que lo mantiene en la cima de uno de los juegos de deporte más jugado y aclamado por sus seguidores. Añadiendo características y dinámicas de juego nuevas, además con una versión free to play para PC.','Microsoft Windows, X-box One, PS4','Inglés, Español','Deportes','https://media.redadn.es/imagenes/pes-2018-pc-ps3-ps4-xbox-360-xbox-one_313675.jpg'),
+('13','World of Warcraft', 'Blizzard Entertainment','10','2004','El legendario y mítico WOW, pionero en el género MMO, lo que le ha permitido estar en las listas de los juegos más jugados por más de 15 años. Dando nuevas actulizaciones, items y skins a sus jugadores por infinidad de años', 'Microsoft Windows','Inglés, Español','MMO','https://vignette.wikia.nocookie.net/wow/images/a/a8/World_of_warcraft-2600259.jpg/revision/latest?cb=20150320022839&path-prefix=es'),
+('14','Black Deset Online', 'Pearl Abyss','8.6','2017','La apuesta Korena para un único MMO, con caracteristicas de actividades inigualables, trade y extensión de misiones, lo que le permite a sus jugadores un sin fin de horas aseguradas.','Microsoft Windows','Inglés, Español','MMO','http://cdn2.gamedots.mx/media/gd/styles/gallerie/public/images/2017/08/blackdesertonlineresena.jpg'),
+('15','TERA', 'Bluehole Studio','8.4','2012','Un juego de la industria de los MMO que apuesta y da todas sus novedades al sistema de combate, lo que le brinda al usuario una experecia de juego más agradeble y placentera. Además, se centra en la unión y creración de clanes para que la comunidad cresca cada vez más','Microsoft Windows, X-box One, PS4','Inglés, Español','MMO','https://steamuserimages-a.akamaihd.net/ugc/541900010227186681/E3C84D97DED3FCA8A3B212AA586A48F858B4FB17/');
+
+insert into JuegoFav (Id,IdUsuario,IdJuego, HorasJugadas) values 
+('1','willy','5',120),
+('2','willy','3',120),
+('3','willy','2',120),
+('4','OscarR','1',120),
+('5','OscarR','3',120);
+
+insert into Comentario (Id,IdUsuario,IdJuego,Coment, Calificacion, Fecha) values 
+('1','willy','5','muy buen juego esta bien hecho',0,'2017-03-01'),
+('2','OscarR','5','muy buen juego esta bien hecho 22222',0,'2017-03-01'),
+('3','rekojmon','3','muy buen juego esta bien hecho 333333',0,'2017-03-01'),
+('4','willy','1','muy buen juego esta bien hecho 44444 ',0,'2017-03-01'),
+('5','willy','2','muy buen juego esta bien hecho  555555',0,'2017-03-01');
+
+insert into Amigo (Id,IdUser1,IdUser2) values 
+('1','willy','OscarR'),
+('2','willy','rekojmon'),
+('3','willy','germann'),
+('4','OscarR','edro'),
+('5','OscarR','rekojmon');
+
+insert into Noticia (Id,Titulo,Texto,imagen) values
+('1','Final Fantasy XV: Windows Edition. ¡Kupó!','Ha pasado más de un año desde su debut en consolas, y por fin, lo que sería la edición GOTY... ','https://i.blogs.es/566090/270218-lanzapc-01/1366_2000.jpg'),
+('2','MonsterHunterWorld es el juego más vendido en toda la historia de Capcom','El día de hoy Capcom ha anunciado que el videojuego Monster Hunter World ya es el game más vendido en la historia de Capcom...','https://i1.wp.com/multianime.com.mx/wp-content/uploads/2018/03/monster-hunter-world.jpg?w=1200&ssl=1'),
+('3','God of War ya es el juego de PS4 mejor puntuado de la historia ','La próxima semana estrena un nuevo título exclusivo, God of War, que ya se ha convertido en el  juego mejor puntuado de la historia de PS4. Lleva un 95 de media en Metacritic, la más alta de la consola...','https://cdn3.computerhoy.com/sites/computerhoy.com/files/styles/fullcontent/public/novedades/god_of_war_puntuacion.jpg?itok=4rOY0Pc-');
+
+insert into CalificacionJuego(Nickname,IdJuego,Calificacion) values
+('willy','5',7);
+
+insert into CalificacionComentario(Nickname,IdComentario,Calificacion) values
+('willy','1',1);
